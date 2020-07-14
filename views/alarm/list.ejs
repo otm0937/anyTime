@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include("../settings/header"); %>
+    <link rel="stylesheet" href="../../stylesheets/alarm/list.css" />
+    <body>
+        <%- include("../components/menu"); %>
+        <div id="alarmList">
+            <% result.forEach(alarm => { %>
+            <div id="card" class="card">
+                <div class="card-body">
+                    <div style="height: 100px;">
+                        <div id="time"">
+                            <div class="start">
+                                <div class="time"><%= alarm.time %></div>
+                                <div class="meridiem"><%= alarm.meridiem %></div>
+                            </div>
+                        </div>
+                        <div id="text">
+                            <h1><%= alarm.title %></h1>
+                            <p><%= alarm.description %></p>
+                        </div>
+                    </div>
+                    <a href="/api/alarm/<%= alarm.id %>" class="btn btn-sm btn-cyan">수정</a>
+                    <a id="delete" class="btn btn-sm btn-cyan" onclick="del('<%= alarm.id %>');">삭제</a>
+                    <button id="<%= alarm.id %>" type="button" class="btn btn-sm btn-cyan" data-toggle="button" aria-pressed="<%= alarm.isOn %>" autocomplete="off" onclick="arm('<%= alarm.id %>');">
+                        <%= alarm.isOn==false?'켜짐':'꺼짐' %>
+                    </button>
+                </div>
+            </div>
+            <% }) %>
+        </div>
+    </div>
+    <div id="create">
+        <i class="fas fa-plus-circle"></i>
+        <div><a href="/api/alarm/new">Create</a></div>
+    </div>
+        <%- include("../settings/footer"); %>
+        <script>
+            $(document).ready(function () {
+                $("#alarmList").lionbars();
+                
+            });
+
+                function arm(id) {
+                    event.preventDefault();
+                    
+                    var  isOn = $("#"+id).attr('aria-pressed');
+                    console.log(id);
+                    console.log(isOn + " "+ typeof(isOn));
+                    if (isOn == "true") isOn= "false";
+                    else isOn="true";
+                    
+                    $.ajax({
+                        url: "/api/alarm/"+id+"/alarm",
+                        type: "PUT",
+                        data: { isOn },
+                    })
+                        .done(() => {
+                            location.href = "/api/alarm";
+                        })
+                        .fail((request, status, error) => {
+                            alert(request.responseText);
+                        });
+                };
+
+            function del(id) {
+                    const result = confirm("삭제하시겠습니까?");
+                    if (result) {
+                        $.ajax({
+                                url: "/api/alarm/"+id,
+                                type: "DELETE",
+                            })
+                            .done(() => {
+                                location.href = "/api/alarm";
+                            })
+                            .fail((request, status, error) => {
+                                alert(request.responseText);
+                            });
+                    }
+                }
+        </script>
+    </body>
+</html>
+

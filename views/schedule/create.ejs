@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include("../settings/header"); %>
+    <link rel="stylesheet" href="../../stylesheets/schedule/create.css" />
+    <body>
+        <%- include("../components/clock"); %>
+        <div id="createBackground">
+            <div id="createBox">
+                <!-- Card -->
+                <div class="card">
+                    <!-- Card body -->
+                    <div class="card-body">
+                        <!-- Material form register -->
+                        <form id="loginForm">
+                            <p class="h4 text-center py-4">Create Schedule</p>
+
+                            <div class="md-form">
+                                <i class="fa fa-clock prefix grey-text"style="top: -4px;"></i>
+                                <input type="text" id="startTime" />
+                                <label for="materialFormCardEmailEx" class="font-weight-light" style="top: -10px;"">Start Time</label>
+                            </div>
+
+                            <div class="md-form">
+                                <i class="fa fa-clock prefix grey-text"style="top: -4px;"></i>
+                                <input type="text" id="endTime" />
+                                <label for="materialFormCardEmailEx" class="font-weight-light" style="top: -10px;">End Time</label>
+                            </div>
+
+                            <div class="md-form">
+                                <i class="fa fa-align-justify prefix grey-text"></i>
+                                <input type="text" id="title" class="form-control" />
+                                <label for="materialFormCardEmailEx" class="font-weight-light">Title</label>
+                            </div>
+
+                            <div class="md-form">
+                                <i class="fa fa-align-justify prefix grey-text"></i>
+                                <input type="text" id="description" class="form-control" />
+                                <label for="materialFormCardPasswordEx" class="font-weight-light">Description</label>
+                            </div>
+                            <div id="list" class="btn btn-cyan">
+                                <a href="/api/schedule">List</a>
+                            </div>
+                            <button id="create" class="btn btn-cyan" type="submit">Create</button>
+                        </form>
+                        <!-- Material form register -->
+                    </div>
+                    <!-- Card body -->
+                </div>
+                <!-- Card -->
+            </div>
+        </div>
+        <%- include("../settings/footer"); %>
+        <script>
+            $(document).ready(function () {
+                $("#startTime").mdtimepicker({
+                    hourPadding:true,
+                });
+            });
+            $(document).ready(function () {
+                $("#endTime").mdtimepicker({
+                    hourPadding:true,
+                });
+            });
+
+            $(function () {
+                $("#create").click((event) => {
+                    event.preventDefault();
+                    
+                    const sT = $("#startTime").val();
+                    const eT = $("#endTime").val();
+
+                    const title = $("#title").val();
+                    const description = $("#description").val();
+                    
+                    const startTime = sT.substring(0,5);
+                    const startMeridiem = sT.substring(6,8);
+                    const endTime = eT.substring(0,5);
+                    const endMeridiem= eT.substring(6,8);
+                    
+                    $.ajax({
+                        url: "/api/schedule/",
+                        type: "POST",
+                        data: { title, description, startTime, startMeridiem, endTime, endMeridiem },
+                    })
+                        .done(() => {
+                            location.href = "/api/schedule";
+                        })
+                        .fail((request, status, error) => {
+                            alert(request.responseText);
+                        });
+                });
+            });
+        </script>
+    </body>
+</html>

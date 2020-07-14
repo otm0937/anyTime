@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include("../settings/header"); %>
+    <link rel="stylesheet" href="../../stylesheets/alarm/update.css" />
+    <body>
+        <%- include("../components/clock"); %>
+        <div id="updateBackground">
+            <div id="updateBox">
+                <!-- Card -->
+                <div class="card">
+                    <!-- Card body -->
+                    <div class="card-body">
+                        <!-- Material form register -->
+                        <form id="updateForm">
+                            <p class="h4 text-center py-4">Create Alarm</p>
+
+                            <div class="md-form">
+                                <i class="fa fa-clock prefix grey-text"style="top: -4px;"></i>
+                                <input type="text" id="time" value="<%= result.time + ' ' + result.meridiem %>" />
+                                <label for="materialFormCardEmailEx" class="font-weight-light" style="top: -10px;"">Time</label>
+                            </div>
+
+                            <div class="md-form">
+                                <i class="fa fa-align-justify prefix grey-text"></i>
+                                <input type="text" id="title" class="form-control" value="<%= result.title %>" />
+                                <label for="materialFormCardEmailEx" class="font-weight-light">Title</label>
+                            </div>
+
+                            <div class="md-form">
+                                <i class="fa fa-align-justify prefix grey-text"></i>
+                                <input type="text" id="description" class="form-control" value="<%= result.description %>"/>
+                                <label for="materialFormCardPasswordEx" class="font-weight-light">Description</label>
+                            </div>
+                            <div id="list" class="btn btn-cyan">
+                                <a href="/api/alarm">List</a>
+                            </div>
+                            <button id="update" class="btn btn-cyan" type="submit">Update</button>
+                        </form>
+                        <!-- Material form register -->
+                    </div>
+                    <!-- Card body -->
+                </div>
+                <!-- Card -->
+            </div>
+        </div>
+        <%- include("../settings/footer"); %>
+        <script>
+            $(document).ready(function () {
+                $("#time").mdtimepicker({
+                    hourPadding:true,
+                });
+            });
+
+            $(function () {
+                $("#update").click((event) => {
+                    event.preventDefault();
+                    
+                    const T = $("#time").val();
+
+                    const title = $("#title").val();
+                    const description = $("#description").val();
+                    
+                    const time = T.substring(0,5);
+                    const meridiem = T.substring(6,8);
+
+                    $.ajax({
+                        url: "/api/alarm/<%= result._id %>",
+                        type: "PUT",
+                        data: { title, description, time, meridiem },
+                    })
+                        .done(() => {
+                            location.href = "/api/alarm";
+                        })
+                        .fail((request, status, error) => {
+                            alert(request.responseText);
+                        });
+                });
+            });
+        </script>
+    </body>
+</html>

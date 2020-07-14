@@ -1,0 +1,15 @@
+{
+  "meteor": {},
+  "dependencies": {
+    "basePackages": {
+      "Lionbars": {
+        "path": "."
+      }
+    },
+    "packages": {
+      "Lionbars": {
+        "path": "."
+      }
+    }
+  }
+}

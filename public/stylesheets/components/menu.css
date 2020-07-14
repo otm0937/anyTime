@@ -1,0 +1,7 @@
+#navbar {
+    background-color: var(--main-theme-color) !important;
+    position: fixed;
+    width: 100vw;
+    z-index: 1000;
+    top: 0px;
+}

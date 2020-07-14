@@ -1,0 +1,94 @@
+#alarmList {
+    width: 60% !important;
+    overflow: scroll;
+    margin-left: 20%;
+    margin-top: 56px;
+}
+
+#card {
+    margin: 10px;
+}
+
+#time {
+    height: 100px;
+    width: fit-content;
+    float: left;
+}
+
+#time div {
+    float: left;
+}
+
+.time {
+    font-size: 4rem;
+}
+
+.tilde {
+    font-size: 4rem;
+    margin: 0px 10px;
+}
+
+.meridiem {
+    font-size: 1.5rem;
+    margin-top: 25%;
+}
+.title {
+    font-size: 2rem;
+}
+
+#card {
+    background-color: gray;
+    color: white;
+    border-radius: 20px;
+}
+
+.title {
+    top: 10px;
+    display: block;
+    float: right;
+}
+
+#text {
+    float: right;
+    height: 150px;
+    width: 500px;
+    border: 2px solid white;
+    border-radius: 20px;
+    padding: 10px;
+    /* background-color: white; */
+}
+
+#create {
+    background-color: var(--main-theme-color);
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    padding: 10px 20px;
+    border-radius: 50px;
+    font-size: 2rem;
+    color: white;
+}
+
+#create i {
+    position: absolute;
+    font-size: 3rem;
+    top: 50%;
+    left: 12px;
+    transform: translatey(-50%);
+}
+#create div {
+    margin-left: 60px;
+}
+#create div a {
+    color: white;
+}
+
+/* .time {
+    background-color: var(--main-theme-color);
+    border-radius: 20px;
+    padding: 0px 10px;
+} */
+
+/* div {
+    border: 0.1px solid black;
+} */

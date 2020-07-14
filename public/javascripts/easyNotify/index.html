@@ -1,0 +1,96 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>jQuery easyNotify.js Plugin Demo</title>
+<link href="http://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<style>
+body { background-color:#fafafa; font-family:'Roboto';}
+h1 { margin:150px auto 30px auto;}
+</style>
+</head>
+
+<body>
+<div id="jquery-script-menu">
+<div class="jquery-script-center">
+<ul>
+<li><a href="http://www.jqueryscript.net/other/jQuery-Plugin-For-HTML5-Desktop-Push-Notifications-easyNotify-js.html">Download This Plugin</a></li>
+<li><a href="http://www.jqueryscript.net/">Back To jQueryScript.Net</a></li>
+</ul>
+<div class="jquery-script-ads"><script type="text/javascript"><!--
+google_ad_client = "ca-pub-2783044520727903";
+/* jQuery_demo */
+google_ad_slot = "2780937993";
+google_ad_width = 728;
+google_ad_height = 90;
+//-->
+</script>
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script></div>
+<div class="jquery-script-clear"></div>
+</div>
+</div>
+<h1 class="text-center">jQuery easyNotify.js Plugin Demo</h1>
+
+
+<div class="container">
+
+
+  <form action="" method="POST" role="form">
+
+    <div class="form-group">
+      <label for="">Title</label>
+      <input type="text" class="form-control" id="title" placeholder="Write some title here" required>
+      <label for="">Message</label>
+      <textarea placeholder="Write some message here" id="message" class="form-control" required></textarea>
+    </div>
+
+    <button type="submit" class="btn btn-success"> <span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Notify</button>
+  </form>
+
+</div>
+
+<script src="http://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script src="easyNotify.js"></script>
+<script>
+var myFunction = function() {
+  alert('Click function');
+};
+var myImg = "https://unsplash.it/600/600?image=777";
+
+$("form").submit(function(event) {
+  event.preventDefault();
+
+  var options = {
+    title: $("#title").val(),
+    options: {
+      body: $("#message").val(),
+      icon: myImg,
+      lang: 'en-US',
+      onClick: myFunction
+    }
+  };
+  console.log(options);
+  $("#easyNotify").easyNotify(options);
+});
+</script>
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-36251023-1']);
+  _gaq.push(['_setDomainName', 'jqueryscript.net']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+</body>
+</html>

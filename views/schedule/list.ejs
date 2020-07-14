@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include("../settings/header"); %>
+    <link rel="stylesheet" href="../../stylesheets/schedule/list.css" />
+    <body>
+        <%- include("../components/menu"); %>
+        <div id="scheduleList">
+            <% result.forEach(schedule => { %>
+            <div id="card" class="card">
+                <div class="card-body">
+                    <div style="height: 100px;">
+                        <div id="time"">
+                            <div class="start">
+                                <div class="time"><%= schedule.startTime %></div>
+                                <div class="meridiem"><%= schedule.startMeridiem %></div>
+                            </div>
+                            <div class="tilde">~</div>
+                            <div class="end">
+                                <div class="time"><%= schedule.endTime %></div>
+                                <div class="meridiem"><%= schedule.endMeridiem %></div>
+                            </div>
+                        </div>
+                        <div id="text">
+                            <h1><%= schedule.title %></h1>
+                            <p><%= schedule.description %></p>
+                        </div>
+                    </div>
+                    <a href="/api/schedule/<%= schedule.id %>" class="btn btn-sm btn-cyan">수정</a>
+                    <a id="delete" class="btn btn-sm btn-cyan" onclick="del('<%= schedule.id %>');">삭제</a>
+                    <button id="<%= schedule.id %>" type="button" class="btn btn-sm btn-cyan" data-toggle="button" aria-pressed="<%= schedule.isOn %>" autocomplete="off" onclick="arm('<%= schedule.id %>');">
+                        <%= schedule.isOn==false?'켜짐':'꺼짐' %>
+                    </button>
+                </div>
+            </div>
+            <% }) %>
+        </div>
+    </div>
+    <div id="create">
+        <i class="fas fa-plus-circle"></i>
+        <div><a href="/api/schedule/new">Create</a></div>
+    </div>
+        <%- include("../settings/footer"); %>
+        <script>
+            $(document).ready(function () {
+                $("#scheduleList").lionbars();
+                
+            });
+
+                function arm(id) {
+                    event.preventDefault();
+                    
+                    var  isOn = $("#"+id).attr('aria-pressed');
+                    console.log(id);
+                    console.log(isOn + " "+ typeof(isOn));
+                    if (isOn == "true") isOn= "false";
+                    else isOn="true";
+                    
+                    $.ajax({
+                        url: "/api/schedule/"+id+"/alarm",
+                        type: "PUT",
+                        data: { isOn },
+                    })
+                        .done(() => {
+                            location.href = "/api/schedule";
+                        })
+                        .fail((request, status, error) => {
+                            alert(request.responseText);
+                        });
+                };
+
+            function del(id) {
+                    const result = confirm("삭제하시겠습니까?");
+                    if (result) {
+                        $.ajax({
+                                url: "/api/schedule/"+id,
+                                type: "DELETE",
+                            })
+                            .done(() => {
+                                location.href = "/api/schedule";
+                            })
+                            .fail((request, status, error) => {
+                                alert(request.responseText);
+                            });
+                    }
+                }
+        </script>
+    </body>
+</html>
+

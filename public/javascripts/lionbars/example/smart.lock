@@ -1,0 +1,18 @@
+{
+  "meteor": {},
+  "dependencies": {
+    "basePackages": {
+      "Planet": {}
+    },
+    "packages": {
+      "Planet": {
+        "git": "https://github.com/yasaricli/planet.git",
+        "tag": "v0.1.5",
+        "commit": "4fe84f06e4bb8562bc8ec6f81f5c450054ab33ad"
+      },
+      "Lionbars": {
+          "path": ".."
+      }
+    }
+  }
+}

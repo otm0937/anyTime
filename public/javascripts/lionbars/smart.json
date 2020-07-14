@@ -1,0 +1,8 @@
+{
+  "name": "Lionbars",
+  "description": "lightweight jQuery plugin that makes scrollbars look like in OSX Lion for Meteor.",
+  "homepage": "http://lionbars.yasaricli.com",
+  "author": "Yasar ICLI <hello@yasaricli.com>",
+  "version": "0.1.0",
+  "git": "https://github.com/yasaricli/meteor-lionbars.git"
+}

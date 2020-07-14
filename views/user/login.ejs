@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include("../../views/settings/header"); %>
+    <link rel="stylesheet" href="../../stylesheets/user/login.css" />
+    <body>
+        <div id="loginBackground">
+            <div id="loginBox">
+                <!-- Card -->
+                <div class="card">
+                    <!-- Card body -->
+                    <div class="card-body">
+                        <!-- Material form register -->
+                        <form id="loginForm">
+                            <p class="h4 text-center py-4">Log in</p>
+
+                            <!-- Material input email -->
+                            <div class="md-form">
+                                <i class="fa fa-envelope prefix grey-text"></i>
+                                <input type="email" id="email" class="form-control" />
+                                <label for="materialFormCardEmailEx" class="font-weight-light">Email</label>
+                            </div>
+
+                            <!-- Material input password -->
+                            <div class="md-form">
+                                <i class="fa fa-lock prefix grey-text"></i>
+                                <input type="password" id="password" class="form-control" />
+                                <label for="materialFormCardPasswordEx" class="font-weight-light">Password</label>
+                            </div>
+
+                            <button id="signin" class="btn btn-cyan" type="submit">Log in</button>
+
+                            <div id="signup" class="btn btn-cyan">
+                                <a href="/api/user/signup">Sign Up</a>
+                            </div>
+                        </form>
+                        <!-- Material form register -->
+                    </div>
+                    <!-- Card body -->
+                </div>
+                <!-- Card -->
+            </div>
+        </div>
+        <%- include("../../views/settings/footer"); %>
+        <script>
+            $(function () {
+                $("#signin").click((event) => {
+                    event.preventDefault();
+                    const email = $("#email").val();
+                    const password = $("#password").val();
+                    $.ajax({
+                        url: "/api/user/login",
+                        type: "POST",
+                        data: { email, password },
+                    })
+                        .done(() => {
+                            location.href = "/api/main";
+                        })
+                        .fail((request, status, error) => {
+                            alert(request.responseText);
+                        });
+                });
+            });
+        </script>
+    </body>
+</html>

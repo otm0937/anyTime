@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include("../settings/header"); %>
+    <link rel="stylesheet" href="../../stylesheets/user/signup.css" />
+    <body>
+        <div id="signupBackground">
+            <div id="signupBox">
+                <!-- Card -->
+                <div class="card">
+                    <!-- Card body -->
+                    <div class="card-body">
+                        <!-- Material form register -->
+                        <form id="loginForm">
+                            <p class="h4 text-center py-4">Sign Up</p>
+
+                            <!-- Material input text -->
+                            <div class="md-form">
+                                <i class="fa fa-user prefix grey-text"></i>
+                                <input type="text" id="name" class="form-control" />
+                                <label for="materialFormCardNameEx" class="font-weight-light">Your name</label>
+                            </div>
+
+                            <!-- Material input email -->
+                            <div class="md-form">
+                                <i class="fa fa-envelope prefix grey-text"></i>
+                                <input type="email" id="email" class="form-control" />
+                                <label for="materialFormCardEmailEx" class="font-weight-light">Email</label>
+                            </div>
+
+                            <!-- Material input password -->
+                            <div class="md-form">
+                                <i class="fa fa-lock prefix grey-text"></i>
+                                <input type="password" id="password" class="form-control" />
+                                <label for="materialFormCardPasswordEx" class="font-weight-light">Password</label>
+                            </div>
+                            <div id="login" class="btn btn-cyan">
+                                <a href="/api/user/login">Log In</a>
+                            </div>
+                            <button id="signup" class="btn btn-cyan" type="submit">Sign Up</button>
+                        </form>
+                        <!-- Material form register -->
+                    </div>
+                    <!-- Card body -->
+                </div>
+                <!-- Card -->
+            </div>
+        </div>
+        <%- include("../settings/footer"); %>
+        <script>
+            $(function () {
+                $("#signup").click((event) => {
+                    event.preventDefault();
+
+                    const name = $("#name").val();
+                    const email = $("#email").val();
+                    const password = $("#password").val();
+
+                    $.ajax({
+                        url: "/api/user/signup",
+                        type: "POST",
+                        data: { name, email, password },
+                    })
+                        .done(() => {
+                            alert("회원가입 되었습니다/");
+                            location.href = "/api/user/login";
+                        })
+                        .fail((request, status, error) => {
+                            alert(request.responseText);
+                        });
+                });
+            });
+        </script>
+    </body>
+</html>

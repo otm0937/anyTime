@@ -1,0 +1,9 @@
+:root {
+    --main-theme-color: rgb(248, 162, 105);
+}
+body {
+    -ms-overflow-style: none;
+}
+::-webkit-scrollbar {
+    display: none;
+}
